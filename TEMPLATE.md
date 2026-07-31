@@ -32,9 +32,13 @@ What changes for stakeholders (holders, stakers, validators, builders), with num
 
 Bullet the material risks, what mitigates each, and what is explicitly out of scope. Include reversibility: how this decision can be adjusted or undone if needed.
 
+## On-Chain Execution
+
+A table of verifiable facts, so any voter can confirm the on-chain referendum matches this text: network, runtime version at drafting, the exact call with arguments, encoded call data, preimage hash (blake2-256) and length, track and dispatch origin, decision deposit, track periods, enactment moment, and the resulting storage effect. Omit for signal-only proposals with no executed call.
+
 ## Voting and Enactment
 
-Keep this brief: the track, the planned submission date, and when the change takes force. If a deterministic in-force date matters, fix enactment with `At(<block>)` rather than `After(...)` and state the target date. Operational detail (submission extrinsics, deposits, block computation) belongs in your own runbook, not the proposal.
+Keep this brief: the track, the planned submission date, and when the change takes force. If a deterministic in-force date matters, fix enactment with `At(<block>)` rather than `After(...)` and state the target date. Operational detail (submission wallet flow, block computation) belongs in your own runbook, not the proposal.
 
 ## Source and Recipient
 

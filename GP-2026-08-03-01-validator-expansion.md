@@ -64,6 +64,25 @@ No supplemental incentives, treasury spends, or token issuance changes are attac
 - **Validator revenue decline.** Fiat-denominated validator economics depend on ENJ price. Because each stage requires its own referendum, the schedule adjusts through governance if operating a validator becomes uneconomical.
 - **No runtime changes.** This proposal executes a single existing staking-pallet call. No code changes, no migrations, no new pallets.
 
+## On-Chain Execution
+
+| Field | Value |
+|---|---|
+| Network | Enjin Relaychain |
+| Runtime at drafting | `enjin/1070` |
+| Call | `staking.increaseValidatorCount(additional: 3)` |
+| Encoded call data | `0x090a0c` |
+| Preimage hash (blake2-256) | `0xc6bcbdbd258dc3b9632affdd2d7bf444dfae386ce6b734c58c0a3604b7219cb9` |
+| Preimage length | 3 bytes |
+| Track | `staking_admin` (ID 100) |
+| Dispatch origin | `Origins.StakingAdmin` |
+| Decision deposit | 100,000 ENJ (refundable on decision) |
+| Track periods | prepare 2 h · decide up to 14 days · confirm 3 h |
+| Enactment | `At(block ≈ 16,864,000)`, ≈ Tuesday 18 August 2026 12:00 UTC |
+| Effect | `Staking::ValidatorCount` storage: 25 → 28, applied at the next era election |
+
+Anyone can verify that the on-chain referendum matches this text: decode the preimage at the hash above (on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps) and confirm it equals the encoded call data. The Staking Admin origin is authorized for this call by the runtime's staking `AdminOrigin` (Root or Staking Admin). Call data is encoded against runtime `enjin/1070`; should a runtime upgrade occur before submission, the encoding will be re-verified.
+
 ## Voting and Enactment
 
 This referendum is submitted on the Staking Admin track on Monday 3 August 2026, with a decision period of up to 14 days. Enactment is fixed at a specific block (approximately 16,864,000), corresponding to Tuesday 18 August 2026 around 12:00 UTC, so the change takes force on a known date regardless of when during the decision period the referendum confirms. The active set expands at the first era election after enactment, expected 19–20 August 2026.
