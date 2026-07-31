@@ -81,7 +81,7 @@ No supplemental incentives, treasury spends, or token issuance changes are attac
 | Enactment | `At(block ≈ 16,864,000)`, ≈ Tuesday 18 August 2026 12:00 UTC |
 | Effect | `Staking::ValidatorCount` storage: 25 → 28, applied at the next era election |
 
-Anyone can verify that the on-chain referendum matches this text: decode the preimage at the hash above (on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps) and confirm it equals the encoded call data. The Staking Admin origin is authorized for this call by the runtime's staking `AdminOrigin` (Root or Staking Admin). Call data is encoded against runtime `enjin/1070`; should a runtime upgrade occur before submission, the encoding will be re-verified.
+To verify the on-chain referendum matches this text, compare the preimage hash above with the one shown on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps. The runtime authorizes the Staking Admin origin to execute this call.
 
 ## Voting and Enactment
 
