@@ -8,26 +8,28 @@ Submitted by: Enjin
 
 ## Summary
 
-This proposal initiates a staged expansion of the Enjin Relaychain active validator set from 25 to 35 validators over twelve months. This referendum enacts the first stage, an increase of the active validator count from 25 to 28, and sets out the full expansion schedule. Each subsequent stage will be enacted by its own referendum on the Root track. This initial expansion advances the secure, decentralized network envisioned in the Enjin Blockchain whitepaper. Once the twelve-month expansion completes, it will be reviewed with a view to continuing from 35 to 50; beyond that, the size of the validator set will be determined by the network through its own governance.
+This proposal expands the Enjin Relaychain active validator set from 25 to 35 validators over twelve months, in four stages enacted by this single referendum: the first increase applies immediately at enactment, and the remaining three are pre-scheduled on-chain at 90-day intervals. This initial expansion advances the secure, decentralized network envisioned in the Enjin Blockchain whitepaper. Once the twelve-month expansion completes, it will be reviewed with a view to continuing from 35 to 50; beyond that, the size of the validator set will be determined by the network through its own governance.
 
 ## Motions
 
 Motion 1
 
-Increase the active validator count of the Enjin Relaychain from 25 to 28 by executing `staking.increaseValidatorCount(3)` via the Root origin, effective at the first era election following enactment.
+Increase the active validator count of the Enjin Relaychain from 25 to 27 by executing `staking.increaseValidatorCount(2)` via the Root origin at enactment, effective at the first era election following it.
 
 Motion 2
 
-Endorse the following twelve-month expansion schedule, with each stage subject to its own referendum on the Root track and contingent on continued network health:
+Pre-schedule the remaining three increases on-chain as named scheduler tasks, executing automatically at 90-day intervals from enactment:
 
-| Stage | Referendum submission | In force (target) | Change | Active set |
+| Stage | Executes at block | Approx. date | Change | Active set |
 |---|---|---|---|---|
-| 1 (this referendum) | Mon 3 Aug 2026 | Tue 18 Aug 2026 | +3 | 28 |
-| 2 | Mon 2 Nov 2026 | Tue 17 Nov 2026 | +3 | 31 |
-| 3 | Mon 1 Feb 2027 | Tue 16 Feb 2027 | +2 | 33 |
-| 4 | Mon 3 May 2027 | Tue 18 May 2027 | +2 | 35 |
+| 1 (at enactment) | 16,950,720 | ≈ 24 Aug 2026 | +2 | 27 |
+| 2 (`nodesmith/t2`) | 18,246,720 | ≈ 22 Nov 2026 | +3 | 30 |
+| 3 (`nodesmith/t3`) | 19,542,720 | ≈ 20 Feb 2027 | +2 | 32 |
+| 4 (`nodesmith/t4`) | 20,838,720 | ≈ 21 May 2027 | +3 | 35 |
 
-New validators enter at the first era election after each stage takes force, typically within one to two eras (days).
+New validators enter at the first era election after each stage executes, typically within one to two eras (days). Scheduled dates are approximate, as block production drifts slightly against wall-clock time.
+
+Should network conditions warrant a pause, any scheduled stage can be cancelled before it executes by a subsequent Root-track referendum calling `scheduler.cancelNamed` with the task id listed above.
 
 ## Rationale
 
@@ -35,7 +37,7 @@ New validators enter at the first era election after each stage takes force, typ
 
 2. **Demonstrated demand.** 27 validators are currently registered for 25 slots, and additional reputable operators have approached Enjin seeking capacity. Demand for slots exceeds supply today.
 
-3. **Staged and adjustable.** Enacting one stage per quarter, each by its own referendum, lets the network verify performance between stages. The schedule can be paused or revised through governance at any point, with no special cancellation mechanism required.
+3. **Staged, transparent, and reversible.** The full twelve-month schedule is enshrined on-chain by this referendum and visible in the scheduler agenda, giving operators and nominators certainty about when capacity opens. The 90-day spacing gives the network a full quarter at each size, and any pending stage can be cancelled by a further referendum if conditions change.
 
 4. **Quality of new entrants.** Slots opened by an increased validator count are filled permissionlessly by the era election. Enjin will monitor each stage of the expansion and work with validator operators as needed to maintain network stability and quality of operation.
 
@@ -48,9 +50,9 @@ Per-validator income at 5% commission as the set expands:
 | Active set | Reward / validator / day | Commission / month | Change vs. today |
 |---|---|---|---|
 | 25 (today) | ~10,350 ENJ | ~15,700 ENJ | — |
-| 28 | ~9,240 ENJ | ~14,000 ENJ | −10.7% |
-| 31 | ~8,340 ENJ | ~12,700 ENJ | −19.4% |
-| 33 | ~7,840 ENJ | ~11,900 ENJ | −24.2% |
+| 27 | ~9,580 ENJ | ~14,600 ENJ | −7.4% |
+| 30 | ~8,620 ENJ | ~13,100 ENJ | −16.7% |
+| 32 | ~8,080 ENJ | ~12,300 ENJ | −21.9% |
 | 35 | ~7,390 ENJ | ~11,200 ENJ | −28.6% |
 
 *Figures are computed from the live network values above (era 1137). The absolute ENJ amounts will drift as total issuance and the staked supply change; the percentage changes depend only on the size of the set.*
@@ -61,10 +63,11 @@ No supplemental incentives, treasury spends, or token issuance changes are attac
 
 ## Risks and Considerations
 
-- **Election is permissionless.** An increased count admits whichever candidates win the era election. The staged schedule allows the network to assess the quality and performance of each intake before the next stage is proposed.
+- **Election is permissionless.** An increased count admits whichever candidates win the era election. The staged schedule allows the network to assess the quality and performance of each intake before the next stage executes.
+- **Scheduled stages execute automatically.** Pausing a pending stage requires a Root-track referendum cancelling its named task before its scheduled block. The 90-day spacing leaves ample time: a cancellation referendum completes in at most ~15 days.
 - **Backing dilution.** Lower average backing per validator is an expected and accepted consequence; total economic security (total stake) is unchanged.
-- **Validator revenue decline.** Fiat-denominated validator economics depend on ENJ price. Because each stage requires its own referendum, the schedule adjusts through governance if operating a validator becomes uneconomical.
-- **No runtime changes.** This proposal executes a single existing staking-pallet call. No code changes, no migrations, no new pallets.
+- **Validator revenue decline.** Fiat-denominated validator economics depend on ENJ price. The review before any continuation beyond 35 accounts for this.
+- **No runtime changes.** This proposal executes existing staking, scheduler, and utility pallet calls. No code changes, no migrations, no new pallets.
 
 ## On-Chain Execution
 
@@ -72,19 +75,28 @@ No supplemental incentives, treasury spends, or token issuance changes are attac
 |---|---|
 | Network | Enjin Relaychain |
 | Runtime at drafting | `enjin/1070` |
-| Call | `staking.increaseValidatorCount(additional: 3)` |
-| Encoded call data | `0x090a0c` |
-| Preimage hash (blake2-256) | `0xc6bcbdbd258dc3b9632affdd2d7bf444dfae386ce6b734c58c0a3604b7219cb9` |
-| Preimage length | 3 bytes |
+| Call | `utility.batchAll([staking.increaseValidatorCount(2), scheduler.scheduleNamed(nodesmith/t2, 18246720, increaseValidatorCount(3)), scheduler.scheduleNamed(nodesmith/t3, 19542720, increaseValidatorCount(2)), scheduler.scheduleNamed(nodesmith/t4, 20838720, increaseValidatorCount(3))])` |
+| Preimage hash (blake2-256) | `0x251c5d288190a8609609bfc1dcb9bf6b2b517b6a6b4e13bb12ef4475547d7c27` |
+| Preimage length | 135 bytes |
 | Track | `root` (ID 0) |
 | Dispatch origin | Root |
 | Decision deposit | 1,000,000 ENJ (refundable on decision) |
 | Track periods | prepare 2 h · decide up to 14 days · confirm 24 h |
-| Enactment | `At(block ≈ 16,864,000)`, ≈ Tuesday 18 August 2026 12:00 UTC |
-| Effect | `Staking::ValidatorCount` storage: 25 → 28, applied at the next era election |
+| Enactment | `At(block 16,950,720)`, ≈ Monday 24 August 2026 |
+| Scheduler task ids | `nodesmith/t2` = `0x6e6f6465736d6974682f74320000…0000` · `t3`, `t4` analogous (ASCII, zero-padded to 32 bytes) |
+| Effect | `Staking::ValidatorCount`: 25 → 27 at enactment, then 30 / 32 / 35 automatically at the scheduled blocks |
 
-To verify the on-chain referendum matches this text, compare the preimage hash above with the one shown on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps. The call requires the Root origin, which the Root track provides.
+Full encoded call data:
+
+```
+0x140210090a0864026e6f6465736d6974682f74320000000000000000000000000000000000000000
+406c1601003f090a0c64026e6f6465736d6974682f74330000000000000000000000000000000000
+000000c0322a01003f090a0864026e6f6465736d6974682f74340000000000000000000000000000
+00000000000040f93d01003f090a0c
+```
+
+To verify the on-chain referendum matches this text, compare the preimage hash above with the one shown on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps. The call requires the Root origin, which the Root track provides; the scheduled tasks dispatch with the same origin.
 
 ## Voting and Enactment
 
-This referendum is submitted on the Root track on Monday 3 August 2026, with a decision period of up to 14 days. Enactment is fixed at a specific block (approximately 16,864,000), targeting Tuesday 18 August 2026 around 12:00 UTC. The active set expands at the first era election after enactment, expected 19–20 August 2026.
+This referendum is submitted on the Root track on Monday 3 August 2026, with a decision period of up to 14 days. Enactment is fixed at block 16,950,720, approximately Monday 24 August 2026, when the first increase applies; the active set expands at the following era election. The remaining increases execute automatically at the scheduled blocks, approximately 22 November 2026, 20 February 2027, and 21 May 2027.
