@@ -8,7 +8,7 @@ Submitted by: Enjin
 
 ## Summary
 
-This proposal initiates a staged expansion of the Enjin Relaychain active validator set from 25 to 35 validators over twelve months. This referendum enacts the first stage, an increase of the active validator count from 25 to 28, and sets out the full expansion schedule. Each subsequent stage will be enacted by its own referendum on the Root track. The expansion is the first phase toward a mid-term target of 50 active validators, with further growth beyond that to follow the network's own.
+This proposal initiates a staged expansion of the Enjin Relaychain active validator set from 25 to 35 validators over twelve months. This referendum enacts the first stage, an increase of the active validator count from 25 to 28, and sets out the full expansion schedule. Each subsequent stage will be enacted by its own referendum on the Root track. This initial expansion advances the secure, decentralized network envisioned in the Enjin Blockchain whitepaper. Increases beyond 35 remain subject to the network itself: its health, validator economics, and future referenda.
 
 ## Motions
 
@@ -57,7 +57,7 @@ Per-validator income at 5% commission as the set expands:
 
 Per-validator commission income declines roughly 29% across the full expansion. This is the transparent trade-off of decentralization. Nominator and pool-member yield is unaffected by the validator count itself: the same reward pool is distributed over the same staked supply. Average stake backing per validator declines from ~18.0M to ~12.8M ENJ as existing nominations spread across a larger set.
 
-No supplemental incentives, treasury spends, or token issuance changes are attached to this proposal. Validators are expected to sustain operations from standard network rewards. Progression beyond 35, toward the mid-term 50-validator target, will be proposed separately and remains conditional on validator economics staying viable at each scale.
+No supplemental incentives, treasury spends, or token issuance changes are attached to this proposal. Validators are expected to sustain operations from standard network rewards. Progression beyond 35 would come by separate proposal, conditional on network health and validator economics staying viable at each scale.
 
 ## Risks and Considerations
 
