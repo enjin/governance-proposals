@@ -8,17 +8,17 @@ Submitted by: Enjin
 
 ## Summary
 
-This proposal initiates a staged expansion of the Enjin Relaychain active validator set from 25 to 35 validators over twelve months. This referendum enacts the first stage, an increase of the active validator count from 25 to 28, and sets out the full expansion schedule. Each subsequent stage will be enacted by its own referendum on the Staking Admin track. The expansion is the first phase toward a long-term goal of 50 active validators.
+This proposal initiates a staged expansion of the Enjin Relaychain active validator set from 25 to 35 validators over twelve months. This referendum enacts the first stage, an increase of the active validator count from 25 to 28, and sets out the full expansion schedule. Each subsequent stage will be enacted by its own referendum on the Root track. The expansion is the first phase toward a long-term goal of 50 active validators.
 
 ## Motions
 
 Motion 1
 
-Increase the active validator count of the Enjin Relaychain from 25 to 28 by executing `staking.increaseValidatorCount(3)` via the Staking Admin origin, effective at the first era election following enactment.
+Increase the active validator count of the Enjin Relaychain from 25 to 28 by executing `staking.increaseValidatorCount(3)` via the Root origin, effective at the first era election following enactment.
 
 Motion 2
 
-Endorse the following twelve-month expansion schedule, with each stage subject to its own referendum on the Staking Admin track and contingent on continued network health:
+Endorse the following twelve-month expansion schedule, with each stage subject to its own referendum on the Root track and contingent on continued network health:
 
 | Stage | Referendum submission | In force (target) | Change | Active set |
 |---|---|---|---|---|
@@ -74,15 +74,15 @@ No supplemental incentives, treasury spends, or token issuance changes are attac
 | Encoded call data | `0x090a0c` |
 | Preimage hash (blake2-256) | `0xc6bcbdbd258dc3b9632affdd2d7bf444dfae386ce6b734c58c0a3604b7219cb9` |
 | Preimage length | 3 bytes |
-| Track | `staking_admin` (ID 100) |
-| Dispatch origin | `Origins.StakingAdmin` |
-| Decision deposit | 100,000 ENJ (refundable on decision) |
-| Track periods | prepare 2 h · decide up to 14 days · confirm 3 h |
+| Track | `root` (ID 0) |
+| Dispatch origin | Root |
+| Decision deposit | 1,000,000 ENJ (refundable on decision) |
+| Track periods | prepare 2 h · decide up to 14 days · confirm 24 h |
 | Enactment | `At(block ≈ 16,864,000)`, ≈ Tuesday 18 August 2026 12:00 UTC |
 | Effect | `Staking::ValidatorCount` storage: 25 → 28, applied at the next era election |
 
-To verify the on-chain referendum matches this text, compare the preimage hash above with the one shown on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps. The runtime authorizes the Staking Admin origin to execute this call.
+To verify the on-chain referendum matches this text, compare the preimage hash above with the one shown on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps. The call requires the Root origin, which the Root track provides.
 
 ## Voting and Enactment
 
-This referendum is submitted on the Staking Admin track on Monday 3 August 2026, with a decision period of up to 14 days. Enactment is fixed at a specific block (approximately 16,864,000), corresponding to Tuesday 18 August 2026 around 12:00 UTC, so the change takes force on a known date regardless of when during the decision period the referendum confirms. The active set expands at the first era election after enactment, expected 19–20 August 2026.
+This referendum is submitted on the Root track on Monday 3 August 2026, with a decision period of up to 14 days. Enactment is fixed at a specific block (approximately 16,864,000), targeting Tuesday 18 August 2026 around 12:00 UTC. The active set expands at the first era election after enactment, expected 19–20 August 2026.
