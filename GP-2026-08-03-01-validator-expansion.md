@@ -57,7 +57,7 @@ Per-validator income at 5% commission as the set expands:
 
 *Figures are computed from the live network values above (era 1137). The absolute ENJ amounts will drift as total issuance and the staked supply change; the percentage changes depend only on the size of the set.*
 
-Per-validator commission income declines roughly 29% across the full expansion. This is the transparent trade-off of decentralization. Nominator and pool-member yield is unaffected by the validator count itself: the same reward pool is distributed over the same staked supply. Average stake backing per validator declines from ~18.0M to ~12.8M ENJ as existing nominations spread across a larger set.
+Per-validator commission income declines roughly 29% across the full expansion. This is the transparent trade-off of decentralization. Aggregate staker rewards are unaffected by the validator count itself: the same reward pool is distributed over the same staked supply. Individual nominator and pool returns depend, as they do today, on the performance and backing of the validators their stake supports; a wider set spreads existing stake across more validators. Average stake backing per validator declines from ~18.0M to ~12.8M ENJ as existing nominations spread across a larger set.
 
 No supplemental incentives, treasury spends, or token issuance changes are attached to this proposal. Validators are expected to sustain operations from standard network rewards. Progression from 35 to 50 would follow a review of this expansion and come by separate proposal, conditional on network health and validator economics staying viable at each scale.
 
