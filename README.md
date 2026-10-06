@@ -1,6 +1,6 @@
 # Enjin Governance Proposals
 
-Canonical texts of governance proposals for the Enjin Relaychain. Each proposal is one markdown file, named by its proposal ID. Once a referendum is submitted on-chain, the file for its proposal is considered final; subsequent edits are limited to status updates.
+Canonical texts of governance proposals for the Enjin Blockchain (Relaychain and Matrixchain). Each proposal is one markdown file, named by its proposal ID. Once a referendum is submitted on-chain, the file for its proposal is considered final; subsequent edits are limited to status updates.
 
 Vote and browse live referenda at [gov.enjin.cloud](https://gov.enjin.cloud).
 
@@ -9,6 +9,8 @@ Vote and browse live referenda at [gov.enjin.cloud](https://gov.enjin.cloud).
 | ID | Title | Track | Status |
 |---|---|---|---|
 | [GP-2026-08-03-01](GP-2026-08-03-01-validator-expansion.md) | Expansion of the Enjin Relaychain Active Validator Set from 25 to 35 | Staking Admin | Pending submission |
+| [GP-2026-10-12-01](GP-2026-10-12-01-relaychain-v1-8-0-upgrade.md) | Enjin Relaychain Runtime Upgrade to v1.8.0 ("Fort Canning") | Root | Pending submission |
+| [GP-2026-11-10-01](GP-2026-11-10-01-matrixchain-v1-4-1-upgrade.md) | Enjin Matrixchain Runtime Upgrade to v1.4.1 ("Fort Canning") | Matrixchain Democracy | Pending submission |
 
 ## Writing a proposal
 
