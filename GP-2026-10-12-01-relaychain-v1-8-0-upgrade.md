@@ -8,13 +8,13 @@ Submitted by: Enjin
 
 ## Summary
 
-This proposal upgrades the Enjin Relaychain runtime from v1.7.0 (spec version 1070) to v1.8.0 (spec version 1080), codenamed Fort Canning, at block 18,059,100, approximately Monday 9 November 2026 at 16:00 UTC. It tunes the governance parameters set at launch, adds dispute slashing, brings the token and marketplace features shared with the Matrixchain, and updates the Polkadot SDK to stable2606. The Matrixchain upgrade follows one week later under its own proposal, GP-2026-11-10-01.
+This proposal authorizes the upgrade of the Enjin Relaychain runtime from v1.7.0 (spec version 1070) to v1.8.0 (spec version 1080), codenamed Fort Canning. The referendum authorizes the new runtime's code hash at block 18,059,050, about five minutes ahead, and the authorized code is then applied in block 18,059,100, approximately Monday 9 November 2026 at 16:00 UTC. The upgrade tunes the governance parameters set at launch, adds dispute slashing, brings the token and marketplace features shared with the Matrixchain, and updates the Polkadot SDK to stable2606. The Matrixchain upgrade follows one week later under its own proposal, GP-2026-11-10-01.
 
 > **Action required.** Validators must run client v1.8.0; other nodes are recommended to also upgrade. Wallets, dependencies and exchanges that hard-code the transaction version must switch from 18 to 19 at enactment. Details are in the [changelog](https://enjin.io/changelog/fort-canning).
 
 ## Motion
 
-Replace the Enjin Relaychain runtime code with Relaychain v1.8.0 by executing `system.setCode(code)` with the Root origin, where `code` is `enjin_runtime.compact.compressed.wasm` from release v1.8.0 (blake2-256 `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da`, 2,122,534 bytes), with enactment fixed at block 18,059,100.
+Authorize runtime code hash `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da` (blake2-256 of `enjin_runtime.compact.compressed.wasm`, the mainnet runtime of Relaychain release v1.8.0, 2,122,534 bytes) by executing `system.authorizeUpgrade(0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da)` with the Root origin, with enactment fixed at block 18,059,050. `checkVersion` is true, so the code is verified to carry `spec_name` `enjin` and a higher `spec_version` before it can be applied. Enjin then applies the authorized code in block 18,059,100 with `system.applyAuthorizedUpgrade(code)`, and v1.8.0 runs from the following block.
 
 ## Changes
 
@@ -31,24 +31,27 @@ Replace the Enjin Relaychain runtime code with Relaychain v1.8.0 by executing `s
 |---|---|
 | Network | Enjin Relaychain |
 | Runtime at drafting | `enjin/1070`, transaction version 18 |
-| Call | `system.setCode(0x…)` with Relaychain v1.8.0 `enjin_runtime.compact.compressed.wasm` |
+| Call | `system.authorizeUpgrade(0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da)` (pallet 0, call 9) |
+| Encoded call data | `0x0009b3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da` |
+| Proposal hash (blake2-256) | `0xaa04cc2c31d7cf2374399be8995303d005f9aac6e077259f41d94e2f5329d7f6` |
+| Proposal length | 34 bytes, submitted inline in the referendum (no preimage deposit) |
+| New runtime | Relaychain v1.8.0 `enjin_runtime.compact.compressed.wasm`, 2,122,534 bytes |
 | Runtime code hash (blake2-256) | `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da` |
-| Preimage hash (blake2-256) | `0x2904d7bd582ecec37cf5c1f1fdd2be663597b84ecee69b8fec1f941cc242885d` |
-| Preimage length | 2,122,540 bytes (deposit about 54 ENJ at 0.000025 ENJ per byte, refundable) |
 | Track | `root` (ID 0) |
 | Dispatch origin | Root |
 | Submission deposit | 0.025 ENJ |
 | Decision deposit | 1,000,000 ENJ (refundable on decision) |
 | Track periods | prepare 2 h · decide up to 14 days · confirm 24 h · minimum enactment 24 h |
-| Enactment | `At(block 18,059,100)`, ≈ Monday 9 November 2026, 16:00 UTC |
+| Enactment | `At(block 18,059,050)`, ≈ Monday 9 November 2026, 15:55 UTC → `system.UpgradeAuthorized {codeHash, checkVersion: true}` |
+| Application | `system.applyAuthorizedUpgrade(code)` with the v1.8.0 runtime, feeless, submitted by Enjin for inclusion in block 18,059,100 (≈ 16:00 UTC); the code is written to `:code` in that block (`system.CodeUpdated`) and runs from block 18,059,101 |
 | Effect | `spec_version` 1070 → 1080, `transaction_version` 18 → 19; `:code` blake2-256 = `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da` |
-| Alternative not used | `system.authorizeUpgrade(0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da)` with a permissionless `applyAuthorizedUpgrade` would need only a 34-byte preimage, but gives up the deterministic `At(block)` enactment. Under the current 0.000025 ENJ per byte the `setCode` preimage costs about 54 ENJ; from v1.8.0 the same preimage would cost about 2,100 ENJ, so `authorizeUpgrade` becomes the default for later upgrades |
+| Not used | `system.setCode(code)` directly, with the runtime as a 2,122,540-byte preimage. `authorizeUpgrade` keeps the proposal to 34 bytes that contain the code hash itself |
 
-To verify: compare the preimage hash above with the referendum's proposal hash on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps, and after enactment compare `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da` with the blake2-256 of the runtime stored at `:code`.
+To verify: the referendum's proposal on [gov.enjin.cloud](https://gov.enjin.cloud) or Polkadot-JS Apps should be the encoded call data above, with proposal hash `0xaa04cc2c31d7cf2374399be8995303d005f9aac6e077259f41d94e2f5329d7f6`; its last 32 bytes are the runtime code hash. The runtime itself is published on-chain when it is applied, and after the upgrade the blake2-256 of the code stored at `:code` should equal `0xb3c5e0dbd0e13b5936d8aead6cbcb505ddb71a671094190a7f08c7e4b2a5a0da`.
 
 ## Voting and Enactment
 
-This referendum is submitted on the root track on Monday 12 October 2026 with a decision period of up to 14 days and a 24-hour confirmation period. Enactment is fixed at block 18,059,100, approximately Monday 9 November 2026 at 16:00 UTC; the time is an estimate at the measured 6.00 seconds per block. The Matrixchain upgrade follows one week later, on Monday 16 November 2026, under its own referendum.
+This referendum is submitted on the root track on Monday 12 October 2026 with a decision period of up to 14 days and a 24-hour confirmation period. Enactment is fixed at block 18,059,050, which authorizes the code hash about five minutes ahead of the upgrade. The code is then applied in block 18,059,100, approximately Monday 9 November 2026 at 16:00 UTC, and v1.8.0 runs from the next block; the time is an estimate at the measured 6.00 seconds per block. The upgrade cannot happen before block 18,059,050. The Matrixchain upgrade follows one week later, on Monday 16 November 2026, under its own referendum.
 
 ## References
 
