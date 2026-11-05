@@ -10,7 +10,7 @@ Submitted by: Enjin
 
 This proposal authorizes the upgrade of the Enjin Relaychain runtime from v1.7.0 (spec version 1070) to v1.8.0 (spec version 1080), codenamed Fort Canning. The referendum authorizes the new runtime's code hash at block 18,059,050, about five minutes ahead, and Enjin then submits the authorized code for inclusion in block 18,059,100, approximately Monday 9 November 2026 at 16:00 UTC. The upgrade tunes the governance parameters set at launch, adds dispute slashing, brings the token and marketplace features shared with the Matrixchain, and updates the Polkadot SDK to stable2606. The Matrixchain upgrade follows one week later under its own proposal, GP-2026-11-10-01.
 
-> **Action required.** Validators must run client v1.8.0; other nodes are recommended to also upgrade. Wallets, dependencies and exchanges that hard-code the transaction version must switch from 18 to 19 when v1.8.0 goes live (planned for block 18,059,101). Details are in the [changelog](https://enjin.io/changelog/fort-canning).
+> **Action required.** Every Relaychain node must run client v1.8.1 before 9 November 2026. v1.8.1 is a client-only release with security fixes; the runtime is still v1.8.0. Wallets, dependencies and exchanges that hard-code the transaction version must switch from 18 to 19 when v1.8.0 goes live (planned for block 18,059,101). Details are in the [changelog](https://enjin.io/changelog/fort-canning).
 
 ## Motion
 
