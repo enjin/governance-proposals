@@ -57,4 +57,4 @@ This referendum is submitted on the root track on Monday 12 October 2026 with a 
 
 - Announcement: [Enjin Blockchain "Fort Canning" Upgrade](https://enjin.io/blog/enjin-blockchain-fort-canning-upgrade)
 - Full changelog and technical notices: [Fort Canning changelog](https://enjin.io/changelog/fort-canning)
-- Companion proposal: [GP-2026-11-10-01, Matrixchain Runtime Upgrade to v1.4.1](GP-2026-11-10-01-matrixchain-v1-4-1-upgrade.md)
+- Companion proposal: [GP-2026-11-10-01, Matrixchain Runtime Upgrade to v1.4.3](GP-2026-11-10-01-matrixchain-v1-4-1-upgrade.md)
