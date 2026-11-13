@@ -8,9 +8,9 @@ Vote and browse live referenda at [gov.enjin.cloud](https://gov.enjin.cloud).
 
 | ID | Title | Track | Status |
 |---|---|---|---|
-| [GP-2026-08-03-01](GP-2026-08-03-01-validator-expansion.md) | Expansion of the Enjin Relaychain Active Validator Set from 25 to 35 | Root | Approved (referendum #10); stage 1 enacted (27 validators), stages 2–4 scheduled |
+| [GP-2026-08-03-01](GP-2026-08-03-01-validator-expansion.md) | Expansion of the Enjin Relaychain Active Validator Set from 25 to 35 | Root | Approved (referendum #10); stage 1 enacted (27 validators), stages 2-4 scheduled |
 | [GP-2026-10-12-01](GP-2026-10-12-01-relaychain-v1-8-0-upgrade.md) | Enjin Relaychain Runtime Upgrade to v1.8.0 ("Fort Canning") | Root | Approved (referendum #16), enacted 9 Nov |
-| [GP-2026-11-10-01](GP-2026-11-10-01-matrixchain-v1-4-1-upgrade.md) | Enjin Matrixchain Runtime Upgrade to v1.4.3 ("Fort Canning") | Matrixchain Democracy | Approved (referendum #22), application 16 Nov |
+| [GP-2026-11-10-01](GP-2026-11-10-01-matrixchain-v1-4-1-upgrade.md) | Enjin Matrixchain Runtime Upgrade to v1.4.3 ("Fort Canning") | Matrixchain Democracy | Approved, application 16 Nov |
 
 ## Writing a proposal
 
